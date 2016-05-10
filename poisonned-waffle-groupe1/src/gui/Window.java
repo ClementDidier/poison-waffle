@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -56,16 +57,16 @@ public class Window implements Runnable
 		
 		this.frame.setJMenuBar(this.menuBar);
 		
-		JPanel contentPanel = new JPanel();
+		JPanel contentPanel = new JPanel(new GridLayout(2,1));
+		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		
 		// Configurations Panel Header
         JPanel headerPanel = new JPanel();
-    	headerPanel.setBackground(Color.RED);
     	
+    	headerPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         headerPanel.setLayout(new GridLayout(0, 1, GAP, GAP));
-        headerPanel.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
         
-        ImageIcon icon = new ImageIcon("./resources/CaseEmpoisonee.png");
+        ImageIcon icon = new ImageIcon("./resources/logo.png");
 	  	JLabel logo = new JLabel(icon);
         headerPanel.add(logo);
     	
@@ -75,12 +76,12 @@ public class Window implements Runnable
         // Configurations Panel Jeu
         JPanel gamePanel = new JPanel();
         GraphicsPanel gameGraphics = new GraphicsPanel(this.game);
-        gamePanel.setPreferredSize(new Dimension(640, 480));
-        gamePanel.add(gameGraphics);
+        //gamePanel.setPreferredSize(new Dimension(640, 480));
+        //gamePanel.add(gameGraphics);
         
         // Ajout des elements au panel principal puis affichage
         contentPanel.add(headerPanel, BorderLayout.NORTH);
-        contentPanel.add(gamePanel);
+        contentPanel.add(gameGraphics, BorderLayout.SOUTH);
         
     	frame.setContentPane(contentPanel);
 	}
