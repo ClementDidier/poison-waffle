@@ -7,9 +7,9 @@ public interface GameInterface {
 	
 	public BoardInterface getBoard();
 
+	public int getTurn();
+	
 	public PlayerInterface getCurrentPlayer();
-
-	public void setCurrentPlayer(PlayerInterface player);
 
 	public void save();
 

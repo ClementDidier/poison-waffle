@@ -1,50 +1,54 @@
 package program;
 
+import java.util.ArrayList;
+
 import entities.Board;
 import entities.Cell;
 import exceptions.OutOfWaffleException;
 import interfaces.BoardInterface;
 import interfaces.GameInterface;
 import interfaces.PlayerInterface;
+import utilities.UndoRedoManager;
 import utilities.Vector2;
 
 public class Game implements GameInterface, Runnable {
 
-	private static final int	DEFAULT_WIDTH	= 6;
-	private static final int	DEFAULT_HEIGHT	= 4;
+	private static final int					DEFAULT_WIDTH	= 6;
+	private static final int					DEFAULT_HEIGHT	= 4;
 
 	/**
 	 * Tableau de case (gaufre)
 	 */
-	protected BoardInterface	board;
+	protected BoardInterface					board;
 	/**
-	 * Joueur 1 : joue le premier tour
+	 * Liste des joueurs, les joueurs jouent dans l'ordre de la liste
 	 */
-	protected PlayerInterface	player1;
+	protected ArrayList<PlayerInterface>		players;
 	/**
-	 * Joueur 2 : joue en second
+	 * Tour courant, débute à 0
 	 */
-	protected PlayerInterface	player2;
+	protected int								currentTurn;
 	/**
-	 * Joueur courant
+	 * Historique des coups
 	 */
-	protected PlayerInterface	currentPlayer;
+	protected UndoRedoManager<BoardInterface>	history;
 
 	public Game(PlayerInterface p1, PlayerInterface p2) {
 		this.board = new Board(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		this.player1 = p1;
-		this.player2 = p2;
-		this.currentPlayer = this.player1;
+		this.players = new ArrayList<PlayerInterface>();
+		this.players.add(p1);
+		this.players.add(p2);
+		this.currentTurn = 0;
+		this.history = new UndoRedoManager<BoardInterface>();
 	}
 
-	public Game(BoardInterface board, PlayerInterface p1, PlayerInterface p2, int cp) {
+	public Game(BoardInterface board, PlayerInterface p1, PlayerInterface p2, int turns, UndoRedoManager<BoardInterface> history) {
 		this.board = board;
-		this.player1 = p1;
-		this.player2 = p2;
-		if (cp == 1)
-			this.currentPlayer = this.player1;
-		else
-			this.currentPlayer = this.player2;
+		this.players = new ArrayList<PlayerInterface>();
+		this.players.add(p1);
+		this.players.add(p2);
+		this.currentTurn = turns;
+		this.history = history;
 	}
 
 	/**
@@ -62,13 +66,13 @@ public class Game implements GameInterface, Runnable {
 	}
 
 	@Override
-	public PlayerInterface getCurrentPlayer() {
-		return this.currentPlayer;
+	public int getTurn() {
+		return this.currentTurn;
 	}
-
+	
 	@Override
-	public void setCurrentPlayer(PlayerInterface player) {
-		this.currentPlayer = player;
+	public PlayerInterface getCurrentPlayer() {
+		return this.players.get(this.currentTurn%this.players.size());
 	}
 
 	@Override
@@ -77,13 +81,16 @@ public class Game implements GameInterface, Runnable {
 	}
 
 	public void makeMove(Vector2 v) {
+		this.history.add(this.board);
+
 		try {
 			if (this.board.getCell(v) == Cell.CLEAN) {
 				for (int i = v.getX(); i < this.board.getSize().getWidth(); i++)
 					for (int j = v.getY(); j < this.board.getSize().getHeight(); j++)
 						this.board.setCell(i, j, Cell.EATEN);
 			}
-		} catch (OutOfWaffleException e) {
+		}
+		catch (OutOfWaffleException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 		}
@@ -97,32 +104,33 @@ public class Game implements GameInterface, Runnable {
 	@Override
 	public void run() {
 		while (!this.isTerminated()) {
-			this.currentPlayer.updateBoard(this.board);
-			Vector2 p = this.currentPlayer.play();
+			this.getCurrentPlayer().updateBoard(this.board);
+			Vector2 p = this.getCurrentPlayer().play();
 			this.makeMove(p);
+			this.currentTurn++;
 		}
 	}
 
 	@Override
 	public void undoMove() {
-		// TODO Auto-generated method stub
-
+		BoardInterface b = this.history.undo(this.board);
+		this.board = b;
 	}
 
 	@Override
 	public void redoMove() {
-		// TODO Auto-generated method stub
-
+		BoardInterface b = this.history.redo(this.board);
+		this.board = b;
 	}
 
 	@Override
 	public boolean canUndo() {
-		return false;
+		return this.history.canUndo();
 	}
 
 	@Override
 	public boolean canRedo() {
-		return false;
+		return this.history.canRedo();
 	}
 
 	@Override
