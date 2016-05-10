@@ -7,6 +7,11 @@ public class UndoRedoManager<T>
 	Stack<T> undoStack;
 	Stack<T> redoStack;
 	
+	public UndoRedoManager() {
+		this.undoStack = new Stack<T>();
+		this.redoStack = new Stack<T>();
+	}
+	
 	public boolean canUndo()
 	{
 		return !this.undoStack.empty();

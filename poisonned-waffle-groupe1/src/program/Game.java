@@ -2,6 +2,8 @@ package program;
 
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
 import entities.Board;
 import entities.Cell;
 import exceptions.OutOfWaffleException;
@@ -42,11 +44,10 @@ public class Game implements GameInterface, Runnable {
 		this.history = new UndoRedoManager<BoardInterface>();
 	}
 
-	public Game(BoardInterface board, PlayerInterface p1, PlayerInterface p2, int turns, UndoRedoManager<BoardInterface> history) {
+	public Game(BoardInterface board, ArrayList<PlayerInterface> players, int turns,
+			UndoRedoManager<BoardInterface> history) {
 		this.board = board;
-		this.players = new ArrayList<PlayerInterface>();
-		this.players.add(p1);
-		this.players.add(p2);
+		this.players = players;
 		this.currentTurn = turns;
 		this.history = history;
 	}
@@ -69,10 +70,10 @@ public class Game implements GameInterface, Runnable {
 	public int getTurn() {
 		return this.currentTurn;
 	}
-	
+
 	@Override
 	public PlayerInterface getCurrentPlayer() {
-		return this.players.get(this.currentTurn%this.players.size());
+		return this.players.get(this.currentTurn % this.players.size());
 	}
 
 	@Override
@@ -98,7 +99,11 @@ public class Game implements GameInterface, Runnable {
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
+		Gson gson = new Gson();
+		String jsonBoard = gson.toJson(this.board);
+		String jsonPlayers = gson.toJson(this.players);
+		String jsonTurns = gson.toJson(this.currentTurn);
+		String jsonHistory = gson.toJson(this.history);
 	}
 
 	@Override
