@@ -16,7 +16,7 @@ public class Program
 		PlayerMouse p1 = new PlayerMouse("Joueur 1");
 		PlayerMouse p2 = new PlayerMouse("Joueur 2");
 		GameInterface game = new Game(p1, p2);
-		Window window = new Window(600, 400, game);
+		Window window = new Window(610, 455, game);
 		SwingUtilities.invokeLater(window);
 	}
 }

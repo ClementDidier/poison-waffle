@@ -39,9 +39,11 @@ public class GraphicsPanel extends JComponent
 				try {
 					currentCell = this.game.getBoard().getCell(x, y);
 				
-					if(!currentCell.equals(Cell.EATEN)) {
+					if(currentCell.getApparence() != null) {
 						BufferedImage currentApparence = currentCell.getApparence();
-						batch.drawImage(currentApparence, this.offset.getX(), this.offset.getY(), currentApparence.getWidth(), currentApparence.getHeight(), null);
+						int w = currentApparence.getWidth() * 10;
+						int h = currentApparence.getHeight() * 10;
+						batch.drawImage(currentApparence, this.offset.getX()+x*w, this.offset.getY()+y*h, w, h, null);
 					}
 				} catch (OutOfWaffleException e) {
 					// TODO Auto-generated catch block
