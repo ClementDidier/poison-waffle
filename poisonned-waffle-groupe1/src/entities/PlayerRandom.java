@@ -15,9 +15,16 @@ public class PlayerRandom extends Player {
 	
 	@Override
 	public Vector2 play() {
+		try {
+			Thread.sleep(800);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		ArrayList<Vector2> validMoves = this.board.getValidMoves();
 		int i = this.rand.nextInt(validMoves.size());
+		System.out.println("IA en " + validMoves.get(i));
 		
 		return validMoves.get(i);
 	}

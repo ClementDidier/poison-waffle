@@ -120,6 +120,6 @@ public class Board implements BoardInterface {
 	}
 	
 	public boolean isInBounds(int xCase, int yCase) {
-		return xCase >= 0 && xCase < this.getWidth() && yCase >= 0 && yCase < this.getHeight();
+		return xCase >= 0 && xCase < this.getWidth() && yCase >= 0 && yCase < this.getHeight() && cells[xCase][yCase]!=Cell.EATEN;
 	}
 }

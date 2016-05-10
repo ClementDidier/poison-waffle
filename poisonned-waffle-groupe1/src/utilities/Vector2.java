@@ -44,7 +44,7 @@ public class Vector2 {
 
 	@Override
 	public String toString() {
-		return String.format("Vector2 [x: {0} y: {y}]", this.x, this.y);
+		return "Vector2 [x: "+this.x+" y: "+this.y+"]";
 	}
 	
 	public int getX() {
