@@ -6,7 +6,7 @@ import interfaces.BoardInterface;
 import interfaces.GameInterface;
 import interfaces.PlayerInterface;
 
-public class Game implements GameInterface{
+public class Game implements GameInterface, Runnable {
 	
 	private static final int DEFAULT_WIDTH = 6;
 	private static final int DEFAULT_HEIGHT = 4;
@@ -88,6 +88,12 @@ public class Game implements GameInterface{
 
 	@Override
 	public void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
 		// TODO Auto-generated method stub
 		
 	}
