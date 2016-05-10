@@ -8,6 +8,8 @@ public class PlayerHard extends Player {
 	
 	public PlayerHard(String name) {
 		super(name);
+		
+		
 	}
 	
 	@Override
