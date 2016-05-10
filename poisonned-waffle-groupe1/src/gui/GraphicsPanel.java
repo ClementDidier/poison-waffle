@@ -26,6 +26,10 @@ public class GraphicsPanel extends JComponent implements MouseMotionListener, Mo
 		this.cursorPos = null;
 		this.highlightColor = null;
 	}
+	
+	public void setGame(GameInterface g) {
+		this.game = g;
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {

@@ -43,29 +43,28 @@ public class Window implements Runnable, ActionListener {
 		this.game = new Game(p1, p2);
 
 		JMenu redoUndo = new JMenu("Historique");
-		JMenu loadSave = new JMenu("Partie");
-
 		JMenuItem redo = new JMenuItem("Refaire");
 		JMenuItem undo = new JMenuItem("Annuler");
-
-		redo.addActionListener(new ButtonMenuListener(redo, game));
-		undo.addActionListener(new ButtonMenuListener(undo, game));
-
 		redoUndo.add(redo);
 		redoUndo.add(undo);
 
+		JMenu loadSave = new JMenu("Partie");
 		JMenuItem save = new JMenuItem("Sauvegarder");
 		JMenuItem load = new JMenuItem("Charger");
 		JMenuItem newGame = new JMenuItem("Nouvelle Partie");
-
 		loadSave.add(newGame);
 		loadSave.add(load);
 		loadSave.add(save);
 
 		this.menuBar.add(loadSave);
 		this.menuBar.add(redoUndo);
-
 		this.frame.setJMenuBar(this.menuBar);
+
+		redo.addActionListener(new ButtonMenuListener(redo, this));
+		undo.addActionListener(new ButtonMenuListener(undo, this));
+		newGame.addActionListener(new ButtonMenuListener(newGame, this));
+		load.addActionListener(new ButtonMenuListener(load, this));
+		save.addActionListener(new ButtonMenuListener(save, this));
 
 		// nombre de coups de chaque joueur
 		// le tour de qui ?
@@ -107,6 +106,10 @@ public class Window implements Runnable, ActionListener {
 		this.game.addListener(this);
 		this.game.doTurn();
 	}
+	
+	public GameInterface getGame() {
+		return this.game;
+	}
 
 	public void notifyVictory(String player) {
 		JOptionPane.showMessageDialog(frame, player + " a gagné.", "Partie terminée", 1);
@@ -114,7 +117,7 @@ public class Window implements Runnable, ActionListener {
 
 	private void updateHeader() {
 		this.turnLabel.setText("Nombre de coups : " + this.game.getTurn());
-		this.currentPlayerLabel.setText("Tour du joueur : " +  this.game.getCurrentPlayer().getName());
+		this.currentPlayerLabel.setText("Tour du joueur : " + this.game.getCurrentPlayer().getName());
 	}
 
 	@Override
@@ -138,5 +141,18 @@ public class Window implements Runnable, ActionListener {
 			default:
 				break;
 		}
+	}
+
+	public void setGame(GameInterface g) {
+		this.game.removeListener(this);
+		this.game = g;
+		this.gameGraphics.endPlayerTurn();
+		this.gameGraphics.setGame(g);
+		
+		this.updateHeader();
+		this.gameGraphics.repaint();
+		
+		this.game.addListener(this);
+		this.game.doTurn();
 	}
 }

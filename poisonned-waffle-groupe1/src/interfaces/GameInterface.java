@@ -26,4 +26,6 @@ public interface GameInterface {
 	void doTurn();
 
 	public void addListener(ActionListener l);
+
+	public void removeListener(ActionListener l);
 }

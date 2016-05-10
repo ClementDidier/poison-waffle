@@ -92,7 +92,7 @@ public class Board implements BoardInterface {
 						res += 'O';
 						break;
 					case EATEN:
-						res += 'O';
+						res += 'E';
 						break;
 					default:
 						res += 'X';

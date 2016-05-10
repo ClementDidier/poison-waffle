@@ -2,13 +2,14 @@ package program;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.ArrayList;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import entities.Board;
@@ -139,21 +140,18 @@ public class Game implements GameInterface {
 
 	@Override
 	public void save() {
-		Gson gson = new Gson();
-		String jsonBoard = gson.toJson(this.board);
-		String jsonPlayers = gson.toJson(this.players);
-		String jsonTurns = gson.toJson(this.currentTurn);
-		String jsonHistory = gson.toJson(this.history);
-
 		try {
-			FileOutputStream fstream = new FileOutputStream("save.txt");
+			Writer writer = new FileWriter("save.json");
 
-			ObjectOutputStream out = new ObjectOutputStream(fstream);
-			out.writeObject(jsonBoard);
-			out.writeObject(jsonPlayers);
-			out.writeObject(jsonTurns);
-			out.writeObject(jsonHistory);
-			out.close();
+			Gson gson = new GsonBuilder().create();
+			ArrayList<String> jsonArray = new ArrayList<String>();
+			jsonArray.add(gson.toJson(this.board));
+			jsonArray.add(gson.toJson(this.players));
+			jsonArray.add(gson.toJson(this.currentTurn));
+			jsonArray.add(gson.toJson(this.history));
+			gson.toJson(jsonArray, writer);
+
+			writer.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -162,26 +160,23 @@ public class Game implements GameInterface {
 
 	public static Game load() {
 		try {
-			FileInputStream fstream = new FileInputStream("save.txt");
+			Reader reader = new FileReader("save.json");
 
-			ObjectInputStream in = new ObjectInputStream(fstream);
-			String jsonBoard = (String) in.readObject();
-			String jsonPlayers = (String) in.readObject();
-			String jsonTurns = (String) in.readObject();
-			String jsonHistory = (String) in.readObject();
-			in.close();
+			Gson gson = new GsonBuilder().create();
+			ArrayList<String> jsonArray = gson.fromJson(reader, new TypeToken<ArrayList<String>>(){}.getType());
 
-			Gson gson = new Gson();
-			BoardInterface b = gson.fromJson(jsonBoard, BoardInterface.class);
-			ArrayList<PlayerInterface> p = gson.fromJson(jsonPlayers,
-					new TypeToken<ArrayList<PlayerInterface>>() {}.getType());
-			int t = gson.fromJson(jsonTurns, int.class);
-			UndoRedoManager<BoardInterface> h = gson.fromJson(jsonHistory,
-					new TypeToken<UndoRedoManager<BoardInterface>>() {}.getType());
-
+			Board b = gson.fromJson(jsonArray.get(0), Board.class);
+			//System.out.println(b.toString());
+			ArrayList<PlayerInterface> p = gson.fromJson(jsonArray.get(1), new TypeToken<ArrayList<PlayerInterface>>(){}.getType());
+			//System.out.println(p.size());
+			int t = gson.fromJson(jsonArray.get(2), int.class);
+			UndoRedoManager<BoardInterface> h = gson.fromJson(jsonArray.get(3), new TypeToken<UndoRedoManager<BoardInterface>>(){}.getType());
+			
+			reader.close(); 
+			
 			return new Game(b, p, t, h);
 		}
-		catch (IOException | ClassNotFoundException e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -209,7 +204,8 @@ public class Game implements GameInterface {
 	@Override
 	public void doTurn() {
 		if (this.isTerminated()) {
-			this.raiseEvent(new ActionEvent(this, EVENT_VICTORY, this.players.get((this.currentTurn-1) % this.players.size()).getName()));
+			this.raiseEvent(new ActionEvent(this, EVENT_VICTORY,
+					this.players.get((this.currentTurn - 1) % this.players.size()).getName()));
 		}
 
 		if (this.getCurrentPlayer().getClass() != PlayerMouse.class) {
@@ -224,6 +220,10 @@ public class Game implements GameInterface {
 
 	public void addListener(ActionListener l) {
 		this.listeners.add(l);
+	}
+
+	public void removeListener(ActionListener l) {
+		this.listeners.remove(l);
 	}
 
 	public void raiseEvent(ActionEvent e) {
