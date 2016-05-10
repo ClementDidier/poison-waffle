@@ -22,7 +22,7 @@ public class Window implements Runnable
 	private GraphicsPanel graphicsPanel;
 	private JMenuBar menuBar;
 	private GameInterface game;
-	//private HeaderPanel headerPanel;
+	private HeaderPanel headerPanel;
 	private static final int GAP = 5;	
 	
 	public Window(int width, int height, GameInterface game)
@@ -59,14 +59,11 @@ public class Window implements Runnable
 		
 		this.frame.setJMenuBar(this.menuBar);
 		
-	  	JLabel logo = new JLabel(new ImageIcon("../ressources/logo.png"));
-	//	headerPanel.add(logo, BorderLayout.EAST);
-		
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new GridLayout(0, 1, GAP, GAP));
         contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
         contentPane.add(new GraphicsPanel(this.game));
-       // contentPane.add(new HeaderPanel());
+        contentPane.add(new HeaderPanel());
 
         
 		this.frame.setContentPane(contentPane);

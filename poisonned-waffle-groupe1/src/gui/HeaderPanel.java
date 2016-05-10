@@ -1,29 +1,21 @@
+@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-public class HeaderPanel extends JPanel {
-
-		private static final long serialVersionUID = 1L;
-    
-	    private JPanel leftPanel;
-
-	    private static final int GAP = 5;
+@@ -22,19 +23,19 @@ public class HeaderPanel extends JPanel {
 	    private GridBagConstraints gbc;
 
 	    public HeaderPanel() {
+	    	
+	    	//setBackground(Color.);
+		  	JLabel logo = new JLabel(new ImageIcon("../ressources/logo.png"));
+			this.add(logo, BorderLayout.EAST);
 
 	    }
+	    
 
 	    private JPanel getPanel() {
 	        JPanel panel = new JPanel();
