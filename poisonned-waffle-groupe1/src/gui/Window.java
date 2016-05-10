@@ -1,7 +1,9 @@
 package gui;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,19 +12,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import interfaces.BoardInterface;
 import interfaces.GameInterface;
-import utilities.UndoRedoManager;
 
 public class Window implements Runnable
 {
 	private static final String DEFAULT_NAME = "Poisonned Waffle";
 	private JFrame frame;
-	private GraphicsPanel graphicsPanel;
 	private JMenuBar menuBar;
 	private GameInterface game;
-	private HeaderPanel headerPanel;
 	private static final int GAP = 5;	
 	
 	public Window(int width, int height, GameInterface game)
@@ -59,18 +56,39 @@ public class Window implements Runnable
 		
 		this.frame.setJMenuBar(this.menuBar);
 		
-        JPanel contentPane = new JPanel();
-        contentPane.setLayout(new GridLayout(0, 1, GAP, GAP));
-        contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
-        contentPane.add(new GraphicsPanel(this.game));
-        contentPane.add(new HeaderPanel());
-
+		JPanel contentPanel = new JPanel();
+		
+		// Configurations Panel Header
+        JPanel headerPanel = new JPanel();
+    	headerPanel.setBackground(Color.RED);
+    	
+        headerPanel.setLayout(new GridLayout(0, 1, GAP, GAP));
+        headerPanel.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
         
-		this.frame.setContentPane(contentPane);
+        ImageIcon icon = new ImageIcon("./resources/CaseEmpoisonee.png");
+	  	JLabel logo = new JLabel(icon);
+        headerPanel.add(logo);
+    	
+    	JLabel label = new JLabel("Coucou");
+        headerPanel.add(label);
+    
+        // Configurations Panel Jeu
+        JPanel gamePanel = new JPanel();
+        GraphicsPanel gameGraphics = new GraphicsPanel(this.game);
+        gamePanel.setPreferredSize(new Dimension(640, 480));
+        gamePanel.add(gameGraphics);
+        
+        // Ajout des elements au panel principal puis affichage
+        contentPanel.add(headerPanel, BorderLayout.NORTH);
+        contentPanel.add(gamePanel);
+        
+    	frame.setContentPane(contentPanel);
 	}
 	
 	@Override
 	public void run() {
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // this.frame.pack();
 		this.frame.setVisible(true);
 	}
 	
