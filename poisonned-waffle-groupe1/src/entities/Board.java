@@ -30,7 +30,7 @@ public class Board implements BoardInterface {
 	@Override
 	public Cell getCell(int x, int y) throws OutOfWaffleException {
 		if(x > this.size.getWidth() || x < 0 || y > this.size.getHeight() || y < 0)
-			throw new OutOfWaffleException("Case en dehors de la gaufre !");
+			throw new OutOfWaffleException("Case (" + x + ", " + y + ") en dehors de la gaufre !");
 		return this.cells[x][y];
 	}
 	
@@ -42,7 +42,7 @@ public class Board implements BoardInterface {
 	@Override
 	public void setCell(int x, int y, Cell c) throws OutOfWaffleException {
 		if(x > this.size.getWidth() || x < 0 || y > this.size.getHeight() || y < 0)
-			throw new OutOfWaffleException("Case en dehors de la gaufre !");
+			throw new OutOfWaffleException("Case (" + x + ", " + y + ") en dehors de la gaufre !");
 		this.cells[x][y] = c;
 	}
 	

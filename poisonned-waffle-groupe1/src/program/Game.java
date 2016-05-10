@@ -79,15 +79,9 @@ public class Game implements GameInterface, Runnable {
 	public void makeMove(Vector2 v) {
 		try {
 			if (this.board.getCell(v) == Cell.CLEAN) {
-				try {
-					for (int i = v.getX(); i < this.board.getSize().getWidth(); i++)
-						for (int j = v.getY(); j < this.board.getSize().getHeight(); j++)
-							this.board.setCell(i, j, Cell.EATEN);
-				}
-				catch (OutOfWaffleException e) {
-					System.err.println(e.getMessage());
-					e.printStackTrace();
-				}
+				for (int i = v.getX(); i < this.board.getSize().getWidth(); i++)
+					for (int j = v.getY(); j < this.board.getSize().getHeight(); j++)
+						this.board.setCell(i, j, Cell.EATEN);
 			}
 		} catch (OutOfWaffleException e) {
 			System.err.println(e.getMessage());
