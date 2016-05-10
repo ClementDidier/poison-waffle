@@ -1,8 +1,12 @@
 package entities;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import utilities.Vector2;
 
-public class PlayerMouse extends Player {
+public class PlayerMouse extends Player implements MouseListener{
 
 	private boolean clickEventRaised;
 	private Vector2 clickLocation;
@@ -34,5 +38,34 @@ public class PlayerMouse extends Player {
 	{
 		this.clickEventRaised = true;
 		this.clickLocation = clickLocation;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		 
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		System.out.println("mouse entered");
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -2,10 +2,8 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 import entities.Cell;
@@ -32,9 +30,9 @@ public class GraphicsPanel extends JComponent
 		this.clear(batch);
 		BufferedImage cell = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		
-		for(int x = 0; x<this.game.getBoard().getSize().getWidth(); x++)
+		for(int x = 0; x<this.game.getBoard().getWidth(); x++)
 		{
-			for(int y = 0; y<this.game.getBoard().getSize().getHeight(); y++){
+			for(int y = 0; y<this.game.getBoard().getHeight(); y++){
 				Cell currentCell;
 				try {
 					currentCell = this.game.getBoard().getCell(x, y);
