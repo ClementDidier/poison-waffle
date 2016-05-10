@@ -16,7 +16,7 @@ import interfaces.PlayerInterface;
 import utilities.UndoRedoManager;
 import utilities.Vector2;
 
-public class Game implements GameInterface, Runnable {
+public class Game implements GameInterface {
 
 	private static final int					DEFAULT_WIDTH	= 6;
 	private static final int					DEFAULT_HEIGHT	= 4;
@@ -113,7 +113,6 @@ public class Game implements GameInterface, Runnable {
 		String jsonHistory = gson.toJson(this.history);
 	}
 
-	@Override
 	public void run() {
 		while (!this.isTerminated()) {
 			this.getCurrentPlayer().updateBoard(this.board.copy());
@@ -171,5 +170,4 @@ public class Game implements GameInterface, Runnable {
 	public void setWindow(Window w) {
 		this.window = w;
 	}
-
 }
