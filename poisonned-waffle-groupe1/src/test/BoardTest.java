@@ -10,10 +10,9 @@ import entities.Cell;
 
 public class BoardTest {
 	protected Board b;
-	
+
 	@Before
-	public void init()
-	{
+	public void init() {
 		b = new Board(2, 2);
 	}
 
@@ -22,7 +21,7 @@ public class BoardTest {
 		// Test de la case empoisonnee
 		assertEquals(b.getCell(0, 0), Cell.POISONNED);
 	}
-	
+
 	@Test
 	public void testCleanCells() throws Exception {
 		// Test des cases "propres"
@@ -30,12 +29,12 @@ public class BoardTest {
 		assertEquals(b.getCell(1, 0), Cell.CLEAN);
 		assertEquals(b.getCell(1, 1), Cell.CLEAN);
 	}
-	
+
 	@Test
 	public void testSet() throws Exception {
 		b.setCell(1, 1, Cell.POISONNED);
-		// Test de la case empoisonnee ajoutee 
+		// Test de la case empoisonnee ajoutee
 		assertEquals(b.getCell(1, 1), Cell.POISONNED);
 	}
-	
+
 }

@@ -1,8 +1,6 @@
 package interfaces;
 
-import entities.Board;
-import gui.GraphicsPanel;
-import gui.Window;
+import java.awt.event.ActionListener;
 
 public interface GameInterface {
 	public boolean isTerminated();
@@ -11,12 +9,6 @@ public interface GameInterface {
 
 	public int getTurn();
 	
-	public PlayerInterface getCurrentPlayer();
-
-	public void save();
-
-	public void loadBoard(Board board);
-
 	public void undoMove();
 
 	public void redoMove();
@@ -25,11 +17,13 @@ public interface GameInterface {
 
 	public boolean canRedo();
 	
-	public void setGraphicsPanel(GraphicsPanel gp);
+	public PlayerInterface getCurrentPlayer();
 
-	public void setWindow(Window w);
-	
-	public void run();
+	public void save();
 
-	public void load();
+	void clickEvent(int xCase, int yCase);
+
+	void doTurn();
+
+	public void addListener(ActionListener l);
 }

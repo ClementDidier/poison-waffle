@@ -1,30 +1,38 @@
 package entities;
+
+import java.awt.Color;
+
 import interfaces.BoardInterface;
 import interfaces.PlayerInterface;
 import utilities.Vector2;
 
-public abstract class Player implements PlayerInterface{
+public abstract class Player implements PlayerInterface {
 
-	protected String name;
-	protected BoardInterface board;
-	
-	public Player(String name)
-	{
+	protected String			name;
+	protected Color			color;
+	protected BoardInterface	board;
+
+	public Player(String name, Color color) {
 		this.name = name;
+		this.color = color;
 	}
-	
+
 	@Override
 	public abstract Vector2 play();
 
 	@Override
-	public void updateBoard(BoardInterface board) {
-		// TODO Auto-generated method stub
-		this.board = board;
+	public void updateBoard(BoardInterface b) {
+		this.board = b;
 	}
-	
+
 	@Override
 	public String getName() {
 		return this.name;
+	}
+	
+	@Override
+	public Color getColor() {
+		return this.color;
 	}
 
 	@Override
@@ -49,5 +57,4 @@ public abstract class Player implements PlayerInterface{
 		return true;
 	}
 
-	
 }
