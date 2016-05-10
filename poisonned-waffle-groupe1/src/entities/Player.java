@@ -1,3 +1,5 @@
+package entities;
+import interfaces.PlayerInterface;
 
 public class Player implements PlayerInterface{
 

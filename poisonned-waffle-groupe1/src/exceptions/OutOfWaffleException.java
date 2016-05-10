@@ -1,3 +1,4 @@
+package exceptions;
 
 public class OutOfWaffleException extends Exception {
 

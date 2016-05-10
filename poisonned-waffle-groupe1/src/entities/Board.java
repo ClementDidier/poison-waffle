@@ -1,4 +1,8 @@
+package entities;
 import java.awt.Dimension;
+
+import exceptions.OutOfWaffleException;
+import interfaces.BoardInterface;
 
 public class Board implements BoardInterface {
 

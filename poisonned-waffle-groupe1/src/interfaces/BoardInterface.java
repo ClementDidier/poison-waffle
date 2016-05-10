@@ -1,4 +1,8 @@
+package interfaces;
 import java.awt.Dimension;
+
+import entities.Cell;
+import exceptions.OutOfWaffleException;
 
 public interface BoardInterface {
 	public Dimension getSize();

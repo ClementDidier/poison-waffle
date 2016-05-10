@@ -1,3 +1,6 @@
+package program;
+
+import gui.Window;
 import javax.swing.SwingUtilities;
 
 public class Program 

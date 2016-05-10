@@ -1,3 +1,10 @@
+package program;
+import entities.Board;
+import entities.Cell;
+import exceptions.OutOfWaffleException;
+import interfaces.BoardInterface;
+import interfaces.GameInterface;
+import interfaces.PlayerInterface;
 
 public class Game implements GameInterface{
 	
@@ -54,12 +61,6 @@ public class Game implements GameInterface{
 	public void setCurrentPlayer(PlayerInterface player) {
 		this.currentPlayer = player;
 		
-	}
-
-	@Override
-	public Game load() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
