@@ -94,6 +94,31 @@ public class Game implements GameInterface, Runnable {
 
 	@Override
 	public void run() {
+		while(!this.isTerminated()) {
+			
+		}
+	}
+
+	@Override
+	public void undoMove() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void redoMove() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void canUndo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void canRedo() {
 		// TODO Auto-generated method stub
 		
 	}
