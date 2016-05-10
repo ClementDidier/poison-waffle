@@ -35,8 +35,8 @@ public class Window implements Runnable
 		loadSave.add(load);
 		loadSave.add(save);
 		
-		this.menuBar.add(redoUndo);
 		this.menuBar.add(loadSave);
+		this.menuBar.add(redoUndo);
 		
 		this.frame.setJMenuBar(this.menuBar);
 		
