@@ -7,11 +7,13 @@ import org.junit.Test;
 
 import entities.PlayerMouse;
 import program.Game;
+import utilities.Vector2;
 
 public class GameTest {
 	protected Game g;
 	protected PlayerMouse player1;
 	protected PlayerMouse player2;
+	protected Vector2 v;
 	@Before
 	public void init()
 	{
@@ -29,14 +31,16 @@ public class GameTest {
 	@Test
 	public void testChangedPlayerAfterFirstPlayed()
 	{
-		g.play(1, 1);
+		v = new Vector2(1,1);
+		g.makeMove(v);
 		assertEquals(g.getCurrentPlayer(), "P2");
 	}
 	
 	@Test
 	public void testGameIsTerminated()
 	{
-		g.play(0, 0);
+		v = new Vector2(0,0);
+		g.makeMove(v);
 		assertEquals(g.isTerminated(), true);
 	}
 
