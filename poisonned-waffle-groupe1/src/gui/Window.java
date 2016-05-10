@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import interfaces.GameInterface;
+import interfaces.PlayerInterface;
 
 public class Window implements Runnable
 {
@@ -81,11 +82,11 @@ public class Window implements Runnable
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.pack();
 		this.frame.setVisible(true);
-	//	this.game.setWindow(this);
+		this.game.setWindow(this);
 	}
 	
-	/*public notifyVictory(PlayerInterface player){
-		JOptionPane.showMessageDialog(frame, player.getName() +"a gagné.","Partie terminée");
-	}*/
+	public void notifyVictory(PlayerInterface player){
+		JOptionPane.showMessageDialog(frame, player.getName() +"a gagné.","Partie terminée", 0);
+	}
 	
 }
