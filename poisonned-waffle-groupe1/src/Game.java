@@ -46,14 +46,13 @@ public class Game implements GameInterface{
 	}
 
 	@Override
-	public Player getCurrentPlayer() {
-		// TODO Auto-generated method stub
-		return null;
+	public PlayerInterface getCurrentPlayer() {
+		return this.currentPlayer;
 	}
 
 	@Override
-	public void setCurrentPlayer() {
-		// TODO Auto-generated method stub
+	public void setCurrentPlayer(PlayerInterface player) {
+		this.currentPlayer = player;
 		
 	}
 
@@ -64,15 +63,26 @@ public class Game implements GameInterface{
 	}
 
 	@Override
-	public Board loadBoard(Board board) {
-		// TODO Auto-generated method stub
-		return null;
+	public void loadBoard(Board board) {
+		this.board = board;
 	}
 
 	@Override
-	public void play(int x, int y) {
-		// TODO Auto-generated method stub
-		
+	public void play(int x, int y) 
+	{
+		if(!this.isTerminated() /* && playPossible(x, y, board) */)
+		{
+			try 
+			{
+				for(int i = x; i < this.board.getSize().getWidth(); i++)
+					for(int j = y; j < this.board.getSize().getHeight(); j++)
+							this.board.setCell(i, j, Cell.EATEN);
+			
+			} catch (OutOfWaffleException e) {
+				System.err.println(e.getMessage());
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

@@ -1,9 +1,9 @@
 import java.util.Stack;
 
-public class UndoRedo {
-	//TODO: Stack de quoi ? ex: Stack<int>
-	Stack undoStack;
-	Stack redoStack;
+public class UndoRedoManager<T> 
+{
+	Stack<T> undoStack;
+	Stack<T> redoStack;
 	
 	public void undo()
 	{

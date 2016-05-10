@@ -1,6 +1,3 @@
-import java.awt.MenuBar;
-import java.awt.MenuItem;
-
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
