@@ -1,6 +1,7 @@
 package interfaces;
 
 import entities.Board;
+import gui.GraphicsPanel;
 
 public interface GameInterface {
 	public boolean isTerminated();
@@ -22,4 +23,6 @@ public interface GameInterface {
 	public boolean canUndo();
 
 	public boolean canRedo();
+	
+	public void setGraphicsPanel(GraphicsPanel gp);
 }

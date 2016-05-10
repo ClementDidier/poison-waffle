@@ -6,7 +6,9 @@ import com.google.gson.Gson;
 
 import entities.Board;
 import entities.Cell;
+import entities.PlayerMouse;
 import exceptions.OutOfWaffleException;
+import gui.GraphicsPanel;
 import interfaces.BoardInterface;
 import interfaces.GameInterface;
 import interfaces.PlayerInterface;
@@ -34,6 +36,7 @@ public class Game implements GameInterface, Runnable {
 	 * Historique des coups
 	 */
 	protected UndoRedoManager<BoardInterface>	history;
+	protected GraphicsPanel graphicsPanel;
 
 	public Game(PlayerInterface p1, PlayerInterface p2) {
 		this.board = new Board(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -41,6 +44,7 @@ public class Game implements GameInterface, Runnable {
 		this.players.add(p1);
 		this.players.add(p2);
 		this.currentTurn = 0;
+		this.graphicsPanel = null;
 		this.history = new UndoRedoManager<BoardInterface>();
 	}
 
@@ -49,6 +53,7 @@ public class Game implements GameInterface, Runnable {
 		this.board = board;
 		this.players = players;
 		this.currentTurn = turns;
+		this.graphicsPanel = null;
 		this.history = history;
 	}
 
@@ -113,6 +118,7 @@ public class Game implements GameInterface, Runnable {
 			Vector2 p = this.getCurrentPlayer().play();
 			this.makeMove(p);
 			this.currentTurn++;
+			this.graphicsPanel.repaint();
 		}
 	}
 
@@ -141,6 +147,16 @@ public class Game implements GameInterface, Runnable {
 	@Override
 	public BoardInterface getBoard() {
 		return this.board;
+	}
+
+	@Override
+	public void setGraphicsPanel(GraphicsPanel gp) {
+		this.graphicsPanel = gp;
+		for(PlayerInterface p : this.players) {
+			if (p.getClass()==PlayerMouse.class) {
+				this.graphicsPanel.requestListener(p);
+			}
+		}
 	}
 
 }
