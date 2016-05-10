@@ -6,11 +6,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import interfaces.GameInterface;
@@ -59,28 +61,16 @@ public class Window implements Runnable
 		
 		JPanel contentPanel = new JPanel(new GridLayout(2,1));
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-		
-		// Configurations Panel Header
-        JPanel headerPanel = new JPanel();
-    	
-    	headerPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        headerPanel.setLayout(new GridLayout(0, 1, GAP, GAP));
+	
+    	// nombre de coups de chaque joueur 
+        // le tour de qui ?
+        HeaderPanel headerGraphics =  new HeaderPanel();
         
-        ImageIcon icon = new ImageIcon("./resources/logo.png");
-	  	JLabel logo = new JLabel(icon);
-        headerPanel.add(logo);
-    	
-    	JLabel label = new JLabel("Coucou");
-        headerPanel.add(label);
-    
-        // Configurations Panel Jeu
-        JPanel gamePanel = new JPanel();
+        // la gaufre
         GraphicsPanel gameGraphics = new GraphicsPanel(this.game);
-        //gamePanel.setPreferredSize(new Dimension(640, 480));
-        //gamePanel.add(gameGraphics);
         
         // Ajout des elements au panel principal puis affichage
-        contentPanel.add(headerPanel, BorderLayout.NORTH);
+        contentPanel.add(headerGraphics, BorderLayout.NORTH);
         contentPanel.add(gameGraphics, BorderLayout.SOUTH);
         
     	frame.setContentPane(contentPanel);
@@ -89,8 +79,13 @@ public class Window implements Runnable
 	@Override
 	public void run() {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // this.frame.pack();
+        this.frame.pack();
 		this.frame.setVisible(true);
+	//	this.game.setWindow(this);
 	}
+	
+	/*public notifyVictory(PlayerInterface player){
+		JOptionPane.showMessageDialog(frame, player.getName() +"a gagné.","Partie terminée");
+	}*/
 	
 }
