@@ -10,6 +10,6 @@ public interface GameInterface {
 	public void play(int x, int y);
 	public void undoMove();
 	public void redoMove();
-	public void canUndo();
-	public void canRedo();
+	public boolean canUndo();
+	public boolean canRedo();
 }

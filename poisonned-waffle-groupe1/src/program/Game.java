@@ -32,11 +32,20 @@ public class Game implements GameInterface, Runnable {
 	public Game(PlayerInterface p1, PlayerInterface p2)
 	{
 		this.board = new Board(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		this.player1 = p1;
+		this.player2 = p2;
+		this.currentPlayer = this.player1;
 	}
 	
-	public Game(BoardInterface board, PlayerInterface p1, PlayerInterface p2)
+	public Game(BoardInterface board, PlayerInterface p1, PlayerInterface p2, int cp)
 	{
 		this.board = board;
+		this.player1 = p1;
+		this.player2 = p2;
+		if(cp==1)
+			this.currentPlayer = this.player1;
+		else
+			this.currentPlayer = this.player2;
 	}
 	
 	/**
@@ -51,7 +60,7 @@ public class Game implements GameInterface, Runnable {
 			return true;
 		}
 	}
-
+	
 	@Override
 	public PlayerInterface getCurrentPlayer() {
 		return this.currentPlayer;
@@ -60,7 +69,6 @@ public class Game implements GameInterface, Runnable {
 	@Override
 	public void setCurrentPlayer(PlayerInterface player) {
 		this.currentPlayer = player;
-		
 	}
 
 	@Override
@@ -112,15 +120,13 @@ public class Game implements GameInterface, Runnable {
 	}
 
 	@Override
-	public void canUndo() {
-		// TODO Auto-generated method stub
-		
+	public boolean canUndo() {
+		return false;
 	}
 
 	@Override
-	public void canRedo() {
-		// TODO Auto-generated method stub
-		
+	public boolean canRedo() {
+		return false;
 	}
 
 }
