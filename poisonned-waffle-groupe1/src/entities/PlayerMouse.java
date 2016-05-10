@@ -2,8 +2,8 @@ package entities;
 
 public class PlayerMouse extends Player {
 
-	public PlayerMouse(byte index) {
-		super(index);
+	public PlayerMouse(String name) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
 

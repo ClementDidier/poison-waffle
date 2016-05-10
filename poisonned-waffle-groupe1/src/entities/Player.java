@@ -4,12 +4,12 @@ import interfaces.PlayerInterface;
 
 public abstract class Player implements PlayerInterface{
 
-	protected byte index;
+	protected String name;
 	protected BoardInterface board;
 	
-	public Player(byte index)
+	public Player(String name)
 	{
-		this.index = index;
+		this.name = name;
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public abstract class Player implements PlayerInterface{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + index;
+		result = prime * result + name.hashCode();
 		return result;
 	}
 
@@ -38,7 +38,7 @@ public abstract class Player implements PlayerInterface{
 		if (!(obj instanceof Player))
 			return false;
 		Player other = (Player) obj;
-		if (index != other.index)
+		if (this.name != other.name)
 			return false;
 		return true;
 	}

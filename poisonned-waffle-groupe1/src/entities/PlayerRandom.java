@@ -2,8 +2,8 @@ package entities;
 
 public class PlayerRandom extends Player {
 
-	public PlayerRandom(byte index) {
-		super(index);
+	public PlayerRandom(String name) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
 	
