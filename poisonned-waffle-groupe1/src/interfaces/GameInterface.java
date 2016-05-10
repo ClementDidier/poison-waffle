@@ -30,4 +30,6 @@ public interface GameInterface {
 	public void setWindow(Window w);
 	
 	public void run();
+
+	public void load();
 }

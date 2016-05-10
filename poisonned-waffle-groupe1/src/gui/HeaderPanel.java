@@ -1,7 +1,10 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -9,22 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class HeaderPanel extends JComponent {
+import interfaces.GameInterface;
 
-	
-	    public HeaderPanel() {
-	
-			// Configurations Panel Header
-	        JPanel headerPanel = new JPanel();
-	        headerPanel.setBorder(new EmptyBorder(0, 0, 20, 0));
-	        headerPanel.setLayout(new GridLayout(1, 0));
-	        
-	        ImageIcon icon = new ImageIcon("./resources/logo.png");
-		  	JLabel logo = new JLabel(icon);
-	        headerPanel.add(logo);
-	    	setSize(getWidth(), getHeight());
-	    	this.setBackground(Color.RED);
+public class HeaderPanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
+	private GameInterface game;
+	
+	    public HeaderPanel(GameInterface game) {
+			this.game = game;
+	    }
+	    
+	    
+	    public void paintComponent(Graphics g) {
+	        Graphics2D dessin = (Graphics2D) g;
+
+	       
 
 	    }
 	    
