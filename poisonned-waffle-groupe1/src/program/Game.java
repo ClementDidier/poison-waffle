@@ -1,5 +1,10 @@
 package program;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -111,7 +116,22 @@ public class Game implements GameInterface {
 		String jsonPlayers = gson.toJson(this.players);
 		String jsonTurns = gson.toJson(this.currentTurn);
 		String jsonHistory = gson.toJson(this.history);
+		
+		try {
+			FileOutputStream fstream = new FileOutputStream("save.txt");
+			
+			ObjectOutputStream out = new ObjectOutputStream(fstream);
+		    out.writeObject(jsonBoard);
+		    out.writeObject(jsonPlayers);
+		    out.writeObject(jsonTurns);
+		    out.writeObject(jsonHistory);
+		    out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
 
 	public void run() {
 		while (!this.isTerminated()) {
@@ -169,5 +189,11 @@ public class Game implements GameInterface {
 	@Override
 	public void setWindow(Window w) {
 		this.window = w;
+	}
+
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
+		return;
 	}
 }

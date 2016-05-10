@@ -30,6 +30,12 @@ public class ButtonMenuListener implements ActionListener {
 				if(this.game.canUndo())
 					this.game.undoMove();
 				break;
+			case "Sauvegarder":
+				this.game.save();
+				break;
+			case "Charger":
+				this.game.load();
+				break;
 			default:
 				System.out.println("bouton encore non implémenté");
 				break;	
