@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import exceptions.OutOfWaffleException;
 import utilities.Vector2;
 
 public class PlayerMouse extends Player implements MouseListener {
@@ -49,10 +50,16 @@ public class PlayerMouse extends Player implements MouseListener {
 		int xCase = (int) posX/Cell.WIDTH;
 		int yCase = (int) posY/Cell.HEIGHT;
 		
-		if(xCase != 0 && yCase != 0 && this.board.isInBounds(xCase, yCase))
+		try 
 		{
-			this.clickLocation = new Vector2(xCase, yCase);
-			this.clickEventRaised = true;
+			if(this.board.getCell(xCase, yCase) != Cell.POISONNED && this.board.isInBounds(xCase, yCase))
+			{
+				this.clickLocation = new Vector2(xCase, yCase);
+				this.clickEventRaised = true;
+			}
+		} catch (OutOfWaffleException e1) {
+			System.err.println(e1.getMessage());
+			e1.printStackTrace();
 		}
 	}
 
