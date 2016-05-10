@@ -19,5 +19,6 @@ public class Program
 		GameInterface game = new Game(p1, p2);
 		Window window = new Window(610, 455, game);
 		SwingUtilities.invokeLater(window);
+		game.run();
 	}
 }

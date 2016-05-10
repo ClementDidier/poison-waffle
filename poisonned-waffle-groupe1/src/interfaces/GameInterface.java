@@ -25,4 +25,6 @@ public interface GameInterface {
 	public boolean canRedo();
 	
 	public void setGraphicsPanel(GraphicsPanel gp);
+
+	public void run();
 }
