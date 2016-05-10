@@ -1,8 +1,15 @@
 package gui;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import interfaces.BoardInterface;
 import interfaces.GameInterface;
@@ -12,9 +19,11 @@ public class Window implements Runnable
 {
 	private static final String DEFAULT_NAME = "Poisonned Waffle";
 	private JFrame frame;
-	private GraphicsPanel panel;
+	private GraphicsPanel graphicsPanel;
 	private JMenuBar menuBar;
 	private GameInterface game;
+	private HeaderPanel headerPanel;
+	private static final int GAP = 5;	
 	
 	public Window(int width, int height, GameInterface game)
 	{
@@ -50,11 +59,17 @@ public class Window implements Runnable
 		
 		this.frame.setJMenuBar(this.menuBar);
 		
+	  	JLabel logo = new JLabel(new ImageIcon("../ressources/logo.png"));
+		headerPanel.add(logo, BorderLayout.EAST);
 		
-		
-		this.panel = new GraphicsPanel();
-		
-		this.frame.setContentPane(this.panel);
+        JPanel contentPane = new JPanel();
+        contentPane.setLayout(new GridLayout(0, 1, GAP, GAP));
+        contentPane.setBorder(new EmptyBorder(GAP, GAP, GAP, GAP));
+        contentPane.add(new GraphicsPanel(this.game));
+        contentPane.add(new HeaderPanel());
+
+        
+		this.frame.setContentPane(contentPane);
 	}
 	
 	@Override
