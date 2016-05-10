@@ -82,12 +82,12 @@ public class Game implements GameInterface, Runnable {
 	}
 
 	public void makeMove(Vector2 v) {
-		this.history.add(this.board);
+		this.history.add(this.board.copy());
 
 		try {
 			if (this.board.getCell(v) == Cell.CLEAN) {
-				for (int i = v.getX(); i < this.board.getSize().getWidth(); i++)
-					for (int j = v.getY(); j < this.board.getSize().getHeight(); j++)
+				for (int i = v.getX(); i < this.board.getWidth(); i++)
+					for (int j = v.getY(); j < this.board.getHeight(); j++)
 						this.board.setCell(i, j, Cell.EATEN);
 			}
 		}

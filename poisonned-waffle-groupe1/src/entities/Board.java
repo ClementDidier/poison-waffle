@@ -1,5 +1,4 @@
 package entities;
-import java.awt.Dimension;
 import java.util.ArrayList;
 
 import exceptions.OutOfWaffleException;
@@ -9,16 +8,18 @@ import utilities.Vector2;
 public class Board implements BoardInterface {
 
 	private Cell[][] cells;
-	private Dimension size;
+	private int width;
+	private int height;
 	
 	public Board(int width, int height)
 	{
 		this.cells = new Cell[width][height];
-		this.size = new Dimension(width, height);
+		this.width = width;
+		this.height = height;
 		
-		for(int x = 0; x < this.size.getWidth(); x++)
+		for(int x = 0; x < this.width; x++)
 		{
-			for(int y = 0; y < this.size.getHeight(); y++)
+			for(int y = 0; y < this.height; y++)
 			{
 				this.cells[x][y] = Cell.CLEAN;
 			}
@@ -29,7 +30,7 @@ public class Board implements BoardInterface {
 	
 	@Override
 	public Cell getCell(int x, int y) throws OutOfWaffleException {
-		if(x > this.size.getWidth() || x < 0 || y > this.size.getHeight() || y < 0)
+		if(x > this.width || x < 0 || y > this.height || y < 0)
 			throw new OutOfWaffleException("Case (" + x + ", " + y + ") en dehors de la gaufre !");
 		return this.cells[x][y];
 	}
@@ -41,7 +42,7 @@ public class Board implements BoardInterface {
 
 	@Override
 	public void setCell(int x, int y, Cell c) throws OutOfWaffleException {
-		if(x > this.size.getWidth() || x < 0 || y > this.size.getHeight() || y < 0)
+		if(x > this.width || x < 0 || y > this.height || y < 0)
 			throw new OutOfWaffleException("Case (" + x + ", " + y + ") en dehors de la gaufre !");
 		this.cells[x][y] = c;
 	}
@@ -52,17 +53,22 @@ public class Board implements BoardInterface {
 	}
 
 	@Override
-	public Dimension getSize() {
-		return this.size;
+	public int getWidth() {
+		return this.width;
+	}
+	
+	@Override
+	public int getHeight() {
+		return this.height;
 	}
 	
 	public ArrayList<Vector2> getValidMoves()
 	{
 		ArrayList<Vector2> result = new ArrayList<Vector2>();
 		
-		for(int x = 0; x < this.size.getWidth(); x++)
+		for(int x = 0; x < this.width; x++)
 		{
-			for(int y = 0; y < this.size.getHeight(); y++)
+			for(int y = 0; y < this.height; y++)
 			{
 				if(this.cells[x][y] == Cell.CLEAN)
 				{
@@ -74,4 +80,42 @@ public class Board implements BoardInterface {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		String res = "Board " + this.width + "x" + this.height + '\n';
+		for(int y = 0; y < this.height; y++)
+		{
+			for(int x = 0; x < this.width; x++)
+			{
+				switch(this.cells[x][y]) {
+					case CLEAN:
+						res += 'O';
+						break;
+					case EATEN:
+						res += 'O';
+						break;
+					default:
+						res += 'X';
+						break;
+				}
+			}
+			res += '\n';
+		}
+		
+		return res;
+	}
+	
+	public BoardInterface copy() {
+		Board b = new Board(this.width, this.height);
+		
+		for(int y = 0; y < this.height; y++)
+		{
+			for(int x = 0; x < this.width; x++)
+			{
+				b.cells[x][y] = this.cells[x][y];
+			}
+		}
+		
+		return b;
+	}
 }
