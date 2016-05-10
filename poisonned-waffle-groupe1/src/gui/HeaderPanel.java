@@ -1,7 +1,10 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -14,17 +17,25 @@ public class HeaderPanel extends JComponent {
 	
 	    public HeaderPanel() {
 	
-			// Configurations Panel Header
-	        JPanel headerPanel = new JPanel();
-	        headerPanel.setBorder(new EmptyBorder(0, 0, 20, 0));
-	        headerPanel.setLayout(new GridLayout(1, 0));
-	        
-	        ImageIcon icon = new ImageIcon("./resources/logo.png");
-		  	JLabel logo = new JLabel(icon);
-	        headerPanel.add(logo);
-	    	setSize(getWidth(), getHeight());
-	    	this.setBackground(Color.RED);
 
+
+	    
+	    }
+	    
+	    
+	    public void paintComponent(Graphics g) {
+	        Graphics2D dessin = (Graphics2D) g;
+
+	        // On reccupere quelques infos
+	        int width = getSize().width;
+	        int height = getSize().height;
+	        int x = 0;
+	        int y = 0;
+	        Point center = new Point(width/2, height/2);
+
+	        String message;
+	
+	        dessin.drawString("test", 10, center.y);
 
 	    }
 	    

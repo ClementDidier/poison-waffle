@@ -70,7 +70,7 @@ public class GraphicsPanel extends JComponent implements MouseMotionListener
 	
 	protected void clear(Graphics2D batch)
 	{
-		batch.setPaint(Color.BLACK);
+		batch.setPaint(Color.WHITE);
 		batch.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 
