@@ -1,7 +1,7 @@
 package interfaces;
-import entities.Cell;
+import utilities.Vector2;
 
 public interface PlayerInterface {
-	public Cell play();
+	public Vector2 play();
 	public void updateBoard(BoardInterface board);
 }

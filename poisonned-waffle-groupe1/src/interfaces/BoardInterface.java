@@ -1,5 +1,6 @@
 package interfaces;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import entities.Cell;
 import exceptions.OutOfWaffleException;
@@ -11,4 +12,5 @@ public interface BoardInterface {
 	public Cell getCell(Vector2 location) throws OutOfWaffleException;
 	public void setCell(int x, int y, Cell c) throws OutOfWaffleException;
 	public void setCell(Vector2 location, Cell c) throws OutOfWaffleException;
+	public ArrayList<Vector2> getValidMoves();
 }

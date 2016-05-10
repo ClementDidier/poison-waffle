@@ -1,6 +1,7 @@
 package entities;
 import interfaces.BoardInterface;
 import interfaces.PlayerInterface;
+import utilities.Vector2;
 
 public abstract class Player implements PlayerInterface{
 
@@ -13,7 +14,7 @@ public abstract class Player implements PlayerInterface{
 	}
 	
 	@Override
-	public abstract Cell play();
+	public abstract Vector2 play();
 
 	@Override
 	public void updateBoard(BoardInterface board) {

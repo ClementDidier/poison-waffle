@@ -1,5 +1,7 @@
 package entities;
 
+import utilities.Vector2;
+
 public class PlayerMouse extends Player {
 
 	public PlayerMouse(String name) {
@@ -8,7 +10,7 @@ public class PlayerMouse extends Player {
 	}
 
 	@Override
-	public Cell play() {
+	public Vector2 play() {
 		// TODO Auto-generated method stub
 		return null;
 	}

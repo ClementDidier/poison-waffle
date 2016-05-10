@@ -1,8 +1,8 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Random;
-
-import exceptions.OutOfWaffleException;
+import utilities.Vector2;
 
 public class PlayerRandom extends Player {
 
@@ -14,17 +14,11 @@ public class PlayerRandom extends Player {
 	}
 	
 	@Override
-	public Cell play() {
-		int x = this.rand.nextInt((int)this.board.getSize().getWidth()) + 1;
-		int y = this.rand.nextInt((int)this.board.getSize().getHeight()) + 1;
+	public Vector2 play() {
 		
-		try 
-		{
-			this.board.getCell(x, y);
-		} catch (OutOfWaffleException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		ArrayList<Vector2> validMoves = this.board.getValidMoves();
+		int i = this.rand.nextInt(validMoves.size());
+		
+		return validMoves.get(i);
 	}
 }
