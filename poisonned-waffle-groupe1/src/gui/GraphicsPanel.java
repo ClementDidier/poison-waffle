@@ -2,6 +2,8 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
@@ -14,7 +16,7 @@ public class GraphicsPanel extends JComponent
 	{
 		super.paintComponent(g);
 		Graphics2D batch = (Graphics2D) g;
-		
+		BufferedImage cell =
 		
 		this.clear(batch);
 		
