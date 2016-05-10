@@ -75,8 +75,12 @@ public class Window implements Runnable
         ImageIcon icon = new ImageIcon("./resources/logo.png");
 	  	JLabel logo = new JLabel(icon);
         headerPanel.add(logo);
-    	
-        headerPanel.add(new HeaderPanel()); 
+        
+        JLabel turn = new JLabel("Nombre de coups : " + game.getTurn());
+        JLabel current = new JLabel("Tour du joueur : " + game.getCurrentPlayer().getName());
+        headerPanel.add(turn); 
+        headerPanel.add(current); 
+        //headerPanel.add(new HeaderPanel(this.game)); 
         
         // la gaufre
         GraphicsPanel gameGraphics = new GraphicsPanel(this.game);
@@ -96,9 +100,10 @@ public class Window implements Runnable
 	@Override
 	public void run() {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setSize(618, 620);
+        this.frame.setSize(605, 608);
 		this.frame.setVisible(true);
 		this.game.setWindow(this);
+		this.frame.setResizable(false);
 	}
 	
 	public void notifyVictory(PlayerInterface player){
