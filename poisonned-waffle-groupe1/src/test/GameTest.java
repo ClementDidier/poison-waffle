@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Cell;
 import entities.PlayerMouse;
+import exceptions.OutOfWaffleException;
 import program.Game;
 import utilities.Vector2;
 
@@ -25,29 +27,70 @@ public class GameTest {
 	@Test
 	public void testFirstPlayerIsP1()
 	{
-		assertEquals(g.getCurrentPlayer(), "P1");
+		assertEquals(g.getCurrentPlayer(), player1);
 	}
 	
 	@Test
-	public void testChangedPlayerAfterFirstPlayed()
+	public void testTurnIs0()
+	{
+		assertEquals(g.getTurn(),0);
+	}
+	
+	@Test
+	public void testFirstMove()
 	{
 		v = new Vector2(1,1);
 		g.makeMove(v);
-		assertEquals(g.getCurrentPlayer(), "P2");
+		try {
+			assertEquals(g.getBoard().getCell(v), Cell.EATEN);
+		} catch (OutOfWaffleException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void testGameIsTerminated()
 	{
-		v = new Vector2(0,0);
+		//Ne doit pas etre termine au debut
+		assertEquals(g.isTerminated(), false);
+		
+		v = new Vector2(0,1);
 		g.makeMove(v);
+		v = new Vector2(1,0);
 		assertEquals(g.isTerminated(), true);
 	}
-
+	
 	@Test
-	public void testSetCurrentPlayer()
+	public void testUndo()
 	{
-		g.setCurrentPlayer(player2);
-		assertEquals(g.getCurrentPlayer(), "P2");
+		v = new Vector2(1,1);
+		try {
+			g.makeMove(v);
+			assertEquals(g.getBoard().getCell(v), Cell.EATEN);
+			g.undoMove();
+			assertEquals(g.getBoard().getCell(v), Cell.CLEAN);
+		} catch (OutOfWaffleException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
+	
+	@Test
+	public void testRedo()
+	{
+		v = new Vector2(1,1);
+		try {
+			g.makeMove(v);
+			assertEquals(g.getBoard().getCell(v), Cell.EATEN);
+			g.undoMove();
+			assertEquals(g.getBoard().getCell(v), Cell.CLEAN);
+			g.redoMove();
+			assertEquals(g.getBoard().getCell(v), Cell.EATEN);
+		} catch (OutOfWaffleException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 }
