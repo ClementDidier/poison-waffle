@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.Board;
 import entities.Cell;
 import entities.PlayerMouse;
 import exceptions.OutOfWaffleException;
@@ -37,6 +38,14 @@ public class GameTest {
 	}
 	
 	@Test
+	public void testLoadBoard()
+	{
+		Board b = new Board(15, 48);
+		g.loadBoard(b);
+		assertEquals(g.getBoard(),b);
+	}
+	
+	@Test
 	public void testFirstMove()
 	{
 		v = new Vector2(1,1);
@@ -58,6 +67,7 @@ public class GameTest {
 		v = new Vector2(0,1);
 		g.makeMove(v);
 		v = new Vector2(1,0);
+		g.makeMove(v);
 		assertEquals(g.isTerminated(), true);
 	}
 	
@@ -66,10 +76,14 @@ public class GameTest {
 	{
 		v = new Vector2(1,1);
 		try {
+			assertEquals(g.canUndo(), false);
 			g.makeMove(v);
+			assertEquals(g.canUndo(), true);
 			assertEquals(g.getBoard().getCell(v), Cell.EATEN);
 			g.undoMove();
+			assertEquals(g.canUndo(), false);
 			assertEquals(g.getBoard().getCell(v), Cell.CLEAN);
+
 		} catch (OutOfWaffleException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
@@ -81,11 +95,19 @@ public class GameTest {
 	{
 		v = new Vector2(1,1);
 		try {
+			assertEquals(g.canUndo(), false);
+			assertEquals(g.canRedo(), false);
 			g.makeMove(v);
+			assertEquals(g.canUndo(), true);
+			assertEquals(g.canRedo(), false);
 			assertEquals(g.getBoard().getCell(v), Cell.EATEN);
 			g.undoMove();
+			assertEquals(g.canUndo(), false);
+			assertEquals(g.canRedo(), true);
 			assertEquals(g.getBoard().getCell(v), Cell.CLEAN);
 			g.redoMove();
+			assertEquals(g.canUndo(), true);
+			assertEquals(g.canRedo(), false);
 			assertEquals(g.getBoard().getCell(v), Cell.EATEN);
 		} catch (OutOfWaffleException e) {
 			System.err.println(e.getMessage());
