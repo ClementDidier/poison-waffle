@@ -1,14 +1,16 @@
 package entities;
 
-public class PlayerRandom extends Player {
+public class PlayerMouse extends Player {
 
-	public PlayerRandom(byte index) {
+	public PlayerMouse(byte index) {
 		super(index);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public Cell play() {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

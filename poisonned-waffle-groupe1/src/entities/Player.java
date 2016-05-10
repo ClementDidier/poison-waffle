@@ -2,15 +2,18 @@ package entities;
 import interfaces.BoardInterface;
 import interfaces.PlayerInterface;
 
-public class Player implements PlayerInterface{
+public abstract class Player implements PlayerInterface{
 
-	private BoardInterface board;
+	protected byte index;
+	protected BoardInterface board;
+	
+	public Player(byte index)
+	{
+		this.index = index;
+	}
 	
 	@Override
-	public Cell play() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract Cell play();
 
 	@Override
 	public void updateBoard(BoardInterface board) {
@@ -18,4 +21,27 @@ public class Player implements PlayerInterface{
 		this.board = board;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + index;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Player))
+			return false;
+		Player other = (Player) obj;
+		if (index != other.index)
+			return false;
+		return true;
+	}
+
+	
 }
