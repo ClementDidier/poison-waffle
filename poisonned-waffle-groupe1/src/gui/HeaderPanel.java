@@ -1,11 +1,15 @@
-@@ -1,5 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-@@ -22,19 +23,19 @@ public class HeaderPanel extends JPanel {
+import java.awt.GridBagConstraints;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public class HeaderPanel extends JPanel {
 	    private GridBagConstraints gbc;
 
 	    public HeaderPanel() {
