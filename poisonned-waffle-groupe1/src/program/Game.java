@@ -154,7 +154,7 @@ public class Game implements GameInterface, Runnable {
 		this.graphicsPanel = gp;
 		for(PlayerInterface p : this.players) {
 			if (p.getClass()==PlayerMouse.class) {
-				this.graphicsPanel.requestListener(p);
+				this.graphicsPanel.requestListener((PlayerMouse)p);
 			}
 		}
 	}

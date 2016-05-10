@@ -118,4 +118,8 @@ public class Board implements BoardInterface {
 		
 		return b;
 	}
+	
+	public boolean isInBounds(int xCase, int yCase) {
+		return xCase >= 0 && xCase < this.getWidth() && yCase >= 0 && yCase < this.getHeight();
+	}
 }

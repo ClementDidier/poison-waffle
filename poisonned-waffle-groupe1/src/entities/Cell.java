@@ -15,6 +15,10 @@ public enum Cell{
 	private String path;
 	private BufferedImage apparence;
 	
+	public static final int WIDTH = 100;
+	public static final int HEIGHT = 100;
+	
+	
 	private Cell(String path){
 		this.path = path;
 		if(this.path.isEmpty()){

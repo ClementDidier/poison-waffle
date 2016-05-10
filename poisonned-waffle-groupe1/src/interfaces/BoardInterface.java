@@ -14,4 +14,5 @@ public interface BoardInterface {
 	public void setCell(Vector2 location, Cell c) throws OutOfWaffleException;
 	public ArrayList<Vector2> getValidMoves();
 	public BoardInterface copy();
+	public boolean isInBounds(int xCase, int yCase);
 }
