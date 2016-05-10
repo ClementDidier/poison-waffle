@@ -9,6 +9,7 @@ import entities.Cell;
 import entities.PlayerMouse;
 import exceptions.OutOfWaffleException;
 import gui.GraphicsPanel;
+import gui.Window;
 import interfaces.BoardInterface;
 import interfaces.GameInterface;
 import interfaces.PlayerInterface;
@@ -36,7 +37,8 @@ public class Game implements GameInterface, Runnable {
 	 * Historique des coups
 	 */
 	protected UndoRedoManager<BoardInterface>	history;
-	protected GraphicsPanel graphicsPanel;
+	protected GraphicsPanel						graphicsPanel;
+	private Window								window;
 
 	public Game(PlayerInterface p1, PlayerInterface p2) {
 		this.board = new Board(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -114,24 +116,30 @@ public class Game implements GameInterface, Runnable {
 	@Override
 	public void run() {
 		while (!this.isTerminated()) {
-			this.getCurrentPlayer().updateBoard(this.board);
+			this.getCurrentPlayer().updateBoard(this.board.copy());
 			Vector2 p = this.getCurrentPlayer().play();
 			this.makeMove(p);
 			this.currentTurn++;
 			this.graphicsPanel.repaint();
 		}
+		this.currentTurn--;
+		this.window.notifyVictory(this.getCurrentPlayer());
 	}
 
 	@Override
 	public void undoMove() {
 		BoardInterface b = this.history.undo(this.board);
 		this.board = b;
+		this.currentTurn--;
+		this.graphicsPanel.repaint();
 	}
 
 	@Override
 	public void redoMove() {
 		BoardInterface b = this.history.redo(this.board);
 		this.board = b;
+		this.currentTurn++;
+		this.graphicsPanel.repaint();
 	}
 
 	@Override
@@ -152,11 +160,16 @@ public class Game implements GameInterface, Runnable {
 	@Override
 	public void setGraphicsPanel(GraphicsPanel gp) {
 		this.graphicsPanel = gp;
-		for(PlayerInterface p : this.players) {
-			if (p.getClass()==PlayerMouse.class) {
-				this.graphicsPanel.requestListener((PlayerMouse)p);
+		for (PlayerInterface p : this.players) {
+			if (p.getClass() == PlayerMouse.class) {
+				this.graphicsPanel.requestListener((PlayerMouse) p);
 			}
 		}
+	}
+
+	@Override
+	public void setWindow(Window w) {
+		this.window = w;
 	}
 
 }

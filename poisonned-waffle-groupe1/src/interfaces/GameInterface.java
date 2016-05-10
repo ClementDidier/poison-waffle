@@ -2,6 +2,7 @@ package interfaces;
 
 import entities.Board;
 import gui.GraphicsPanel;
+import gui.Window;
 
 public interface GameInterface {
 	public boolean isTerminated();
@@ -26,5 +27,7 @@ public interface GameInterface {
 	
 	public void setGraphicsPanel(GraphicsPanel gp);
 
+	public void setWindow(Window w);
+	
 	public void run();
 }

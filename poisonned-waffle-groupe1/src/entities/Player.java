@@ -21,6 +21,11 @@ public abstract class Player implements PlayerInterface{
 		// TODO Auto-generated method stub
 		this.board = board;
 	}
+	
+	@Override
+	public String getName() {
+		return this.name;
+	}
 
 	@Override
 	public int hashCode() {
