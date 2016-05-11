@@ -207,14 +207,15 @@ public class Game implements GameInterface {
 			this.raiseEvent(new ActionEvent(this, EVENT_VICTORY,
 					this.players.get((this.currentTurn - 1) % this.players.size()).getName()));
 		}
-
-		if (this.getCurrentPlayer().getClass() != PlayerMouse.class) {
-			this.getCurrentPlayer().updateBoard(this.board.copy());
-			Vector2 move = this.getCurrentPlayer().play();
-			this.makeMove(move);
-		}
 		else {
-			this.raiseEvent(new ActionEvent(this.getCurrentPlayer().getColor(), EVENT_PLAYER_TURN_START, null));
+			if (this.getCurrentPlayer().getClass() != PlayerMouse.class) {
+				this.getCurrentPlayer().updateBoard(this.board.copy());
+				Vector2 move = this.getCurrentPlayer().play();
+				this.makeMove(move);
+			}
+			else {
+				this.raiseEvent(new ActionEvent(this.getCurrentPlayer().getColor(), EVENT_PLAYER_TURN_START, null));
+			}
 		}
 	}
 

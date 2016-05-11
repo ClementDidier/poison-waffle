@@ -69,7 +69,7 @@ public class Window implements Runnable, ActionListener {
 		// nombre de coups de chaque joueur
 		// le tour de qui ?
 		JPanel headerPanel = new JPanel();
-		headerPanel.setPreferredSize(new Dimension(600, 150));
+		headerPanel.setPreferredSize(new Dimension(600, 110));
 		headerPanel.setBackground(Color.WHITE);
 		headerPanel.setLayout(new GridLayout(1, 0));
 
@@ -77,8 +77,8 @@ public class Window implements Runnable, ActionListener {
 		JLabel logo = new JLabel(icon);
 		headerPanel.add(logo);
 
-		this.turnLabel = new JLabel("Nombre de coups : " + game.getTurn());
-		this.currentPlayerLabel = new JLabel("Tour du joueur : " + game.getCurrentPlayer().getName());
+		this.turnLabel = new JLabel("Nombre de coups: " + game.getTurn());
+		this.currentPlayerLabel = new JLabel("Tour du joueur: " + game.getCurrentPlayer().getName());
 		headerPanel.add(turnLabel);
 		headerPanel.add(currentPlayerLabel);
 
@@ -101,7 +101,7 @@ public class Window implements Runnable, ActionListener {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setSize(605, 608);
 		this.frame.setVisible(true);
-		this.frame.setResizable(false);
+		//this.frame.setResizable(false);
 
 		this.game.addListener(this);
 		this.game.doTurn();

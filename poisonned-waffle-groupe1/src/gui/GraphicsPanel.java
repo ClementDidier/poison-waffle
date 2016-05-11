@@ -61,6 +61,10 @@ public class GraphicsPanel extends JComponent implements MouseMotionListener, Mo
 				}
 			}
 		}
+		if(this.game.isTerminated()) {
+			batch.setPaint(new Color(40,40,40,160));
+			batch.fillRect(0, 0, this.getWidth(), this.getHeight());
+		}
 	}
 
 	public void readyPlayerTurn(Color color)
