@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.text.Format;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Set;
@@ -9,13 +10,16 @@ import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import interfaces.PlayerInterface;
+import utilities.JNumberTextField;
 
 public class DialogNewGame extends JDialog{
 	
@@ -36,7 +40,7 @@ public class DialogNewGame extends JDialog{
 	
 	private void initComponent(){
 		JPanel content = new JPanel();
-		
+		content.setLayout(new GridLayout(3, 2));
 		//===========Joueur 1 =========//
 		JPanel panPlayer1 = new JPanel();
 		panPlayer1.setLayout(new GridLayout(2, 2));
@@ -82,6 +86,21 @@ public class DialogNewGame extends JDialog{
 		
 		content.add(panPlayer1);
 		content.add(panPlayer2);
+		
+		
+		//Taille de la carte
+		JPanel panelBoardSize  = new JPanel();
+		panelBoardSize.setBorder(BorderFactory.createTitledBorder("Taille de la carte"));
+		JNumberTextField numberTextFieldWidth = new JNumberTextField();
+		
+		JLabel labelWidth = new JLabel("Largeur: ");
+		
+		panelBoardSize.add(labelWidth);
+		panelBoardSize.add(numberTextFieldWidth);
+		content.add(panelBoardSize, BorderLayout.SOUTH);
+		
 		this.getContentPane().add(content, BorderLayout.WEST);
+		
+		
 	}
 }
