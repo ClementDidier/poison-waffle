@@ -10,7 +10,6 @@ public class PlayerHard extends Player {
 	}
 
 	@Override
-	public void play(GameInterface g) {
-	}
+	public void play(GameInterface g) {}
 
 }

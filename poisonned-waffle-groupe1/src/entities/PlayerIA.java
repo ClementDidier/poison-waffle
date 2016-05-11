@@ -11,9 +11,9 @@ import utilities.Vector2;
 
 public abstract class PlayerIA extends Player implements ActionListener {
 
-	protected Random rand;
-	protected GameInterface game;
-	protected Timer t;
+	protected Random		rand;
+	protected GameInterface	game;
+	protected Timer			t;
 
 	public PlayerIA(String name, Color color) {
 		super(name, color);
@@ -25,15 +25,15 @@ public abstract class PlayerIA extends Player implements ActionListener {
 	@Override
 	public void play(GameInterface g) {
 		this.game = g;
-		
+
 		this.t = new Timer(800 + rand.nextInt(600), this);
 		t.start();
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.t.stop();
-		
+
 		Vector2 chosenMove = this.decideMove();
 
 		this.game.receiveMove(chosenMove);

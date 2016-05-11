@@ -15,7 +15,7 @@ public class PlayerRandom extends PlayerIA {
 		ArrayList<Vector2> validMoves = this.board.getValidMoves();
 		int i = this.rand.nextInt(validMoves.size());
 		System.out.println("IA en " + validMoves.get(i));
-		
+
 		return validMoves.get(i);
 	}
 }

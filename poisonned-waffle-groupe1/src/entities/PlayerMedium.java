@@ -50,7 +50,7 @@ public class PlayerMedium extends PlayerIA {
 		else {
 			chosenMove = validMoves.get(this.rand.nextInt(validMoves.size()));
 		}
-		
+
 		return chosenMove;
 	}
 }

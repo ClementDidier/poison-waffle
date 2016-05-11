@@ -163,17 +163,19 @@ public class Game implements GameInterface {
 			Reader reader = new FileReader("save.json");
 
 			Gson gson = new GsonBuilder().create();
-			ArrayList<String> jsonArray = gson.fromJson(reader, new TypeToken<ArrayList<String>>(){}.getType());
+			ArrayList<String> jsonArray = gson.fromJson(reader, new TypeToken<ArrayList<String>>() {}.getType());
 
 			Board b = gson.fromJson(jsonArray.get(0), Board.class);
-			//System.out.println(b.toString());
-			ArrayList<PlayerInterface> p = gson.fromJson(jsonArray.get(1), new TypeToken<ArrayList<PlayerInterface>>(){}.getType());
-			//System.out.println(p.size());
+			// System.out.println(b.toString());
+			ArrayList<PlayerInterface> p = gson.fromJson(jsonArray.get(1),
+					new TypeToken<ArrayList<PlayerInterface>>() {}.getType());
+			// System.out.println(p.size());
 			int t = gson.fromJson(jsonArray.get(2), int.class);
-			UndoRedoManager<BoardInterface> h = gson.fromJson(jsonArray.get(3), new TypeToken<UndoRedoManager<BoardInterface>>(){}.getType());
-			
-			reader.close(); 
-			
+			UndoRedoManager<BoardInterface> h = gson.fromJson(jsonArray.get(3),
+					new TypeToken<UndoRedoManager<BoardInterface>>() {}.getType());
+
+			reader.close();
+
 			return new Game(b, p, t, h);
 		}
 		catch (IOException e) {
@@ -217,14 +219,13 @@ public class Game implements GameInterface {
 			}
 		}
 	}
-	
+
 	@Override
 	public void receiveMove(Vector2 move) {
 		if (!this.isTerminated()) {
 			this.makeMove(move);
 		}
 	}
-	
 
 	public void addListener(ActionListener l) {
 		this.listeners.add(l);
