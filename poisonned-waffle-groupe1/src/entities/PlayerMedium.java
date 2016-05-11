@@ -18,24 +18,29 @@ public class PlayerMedium extends Player {
 	public Vector2 play() {
 		Vector2 chosenMove = null;
 		ArrayList<Vector2> validMoves = this.board.getValidMoves();
-		if (!validMoves.contains(new Vector2(1, 1))) {
-			if (validMoves.contains(new Vector2(1, 0)) == true && validMoves.contains(new Vector2(0, 1)) == false) {
+		boolean needChoice = !validMoves.contains(new Vector2(1, 1));
+		if (needChoice) {
+			boolean lignePresente = validMoves.contains(new Vector2(1, 0));
+			boolean colonnePresente = validMoves.contains(new Vector2(0, 1));
+			if (lignePresente == true && colonnePresente == false) {
 				chosenMove = new Vector2(1, 0);
 			}
-			else if (validMoves.contains(new Vector2(1, 0)) == false && validMoves.contains(new Vector2(0, 1)) == true) {
+			else if (lignePresente == false && colonnePresente == true) {
 				chosenMove = new Vector2(0, 1);
 			}
 			else {
-				if (validMoves.contains(new Vector2(2, 0)) == true && validMoves.contains(new Vector2(0, 2)) == true) {
+				boolean ligneEtendue = validMoves.contains(new Vector2(2, 0));
+				boolean colonneEtendue = validMoves.contains(new Vector2(0, 2));
+				if (ligneEtendue == true && colonneEtendue == true) {
 					if(rand.nextBoolean())
 						chosenMove = new Vector2(2, 0);
 					else
 						chosenMove = new Vector2(0, 2);
 				}
-				else if (validMoves.contains(new Vector2(2, 0)) == true && validMoves.contains(new Vector2(0, 2)) == false) {
+				else if (ligneEtendue == true && colonneEtendue == false) {
 					chosenMove = new Vector2(2, 0);
 				}
-				else if (validMoves.contains(new Vector2(2, 0)) == false && validMoves.contains(new Vector2(0, 2)) == true) {
+				else if (ligneEtendue == false && colonneEtendue == true) {
 					chosenMove = new Vector2(0, 2);
 				}
 				else {
