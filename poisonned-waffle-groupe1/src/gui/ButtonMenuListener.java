@@ -33,7 +33,7 @@ public class ButtonMenuListener implements ActionListener {
 					this.window.getGame().undoMove();
 				break;
 			case "Nouvelle Partie":
-				//this.window.askPlayersForNewGame();
+				this.window.askPlayersForNewGame();
 				PlayerInterface player1 = new PlayerMouse("P1", new Color(120,50,50,125));
 				PlayerInterface player2 = new PlayerMouse("P2", new Color(50,50,120,125));
 				GameInterface g = new Game(player1, player2);

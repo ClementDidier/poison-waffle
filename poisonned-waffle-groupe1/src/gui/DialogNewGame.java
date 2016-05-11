@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.util.Hashtable;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -8,6 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import interfaces.PlayerInterface;
 
 public class DialogNewGame extends JDialog{
 	
@@ -33,6 +36,8 @@ public class DialogNewGame extends JDialog{
 		
 		panPlayer1.setBorder(BorderFactory.createTitledBorder("Joueur 1"));
 		JLabel labelTypePlayer1 = new JLabel("Type du joueur1");
+		
+		Hashtable<String, Class> listTypePlayer = this.window.getListTypePlayer();
 		
 		panPlayer1.add(labelTypePlayer1);
 		

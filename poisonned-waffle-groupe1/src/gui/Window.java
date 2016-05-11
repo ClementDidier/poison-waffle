@@ -172,7 +172,7 @@ public class Window implements Runnable, ActionListener {
 		DialogNewGame dialogNewGame = new DialogNewGame(this.frame, "Nouvelle Partie", true, this);
 	}
 	
-	public Hashtable<String, Class> getListeTypeJoueur(){
+	public Hashtable<String, Class> getListTypePlayer(){
 		Hashtable<String, Class> list = new Hashtable<>();
 		list.put("Joueur humain", PlayerMouse.class);
 		list.put("IA facile", PlayerRandom.class);
