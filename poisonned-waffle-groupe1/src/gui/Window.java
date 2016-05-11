@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,6 +20,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import entities.PlayerHard;
+import entities.PlayerMedium;
 import entities.PlayerMouse;
 import entities.PlayerRandom;
 import interfaces.GameInterface;
@@ -161,5 +166,19 @@ public class Window implements Runnable, ActionListener {
 		
 		this.game.addListener(this);
 		this.game.doTurn();
+	}
+	
+	public void askPlayersForNewGame(){
+		DialogNewGame dialogNewGame = new DialogNewGame(this.frame, "Nouvelle Partie", true);
+	}
+	
+	public Hashtable<String, Class> getListeTypeJoueur(){
+		Hashtable<String, Class> list = new Hashtable<>();
+		list.put("Joueur humain", PlayerMouse.class);
+		list.put("IA facile", PlayerRandom.class);
+		list.put("IA Moyenne", PlayerMedium.class);
+		list.put("IA Difficile", PlayerHard.class);
+		
+		return list;
 	}
 }
