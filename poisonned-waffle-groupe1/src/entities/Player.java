@@ -3,8 +3,8 @@ package entities;
 import java.awt.Color;
 
 import interfaces.BoardInterface;
+import interfaces.GameInterface;
 import interfaces.PlayerInterface;
-import utilities.Vector2;
 
 public abstract class Player implements PlayerInterface {
 
@@ -18,7 +18,7 @@ public abstract class Player implements PlayerInterface {
 	}
 
 	@Override
-	public abstract Vector2 play();
+	public abstract void play(GameInterface g);
 
 	@Override
 	public void updateBoard(BoardInterface b) {

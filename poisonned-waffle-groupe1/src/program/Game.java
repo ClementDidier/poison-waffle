@@ -210,14 +210,21 @@ public class Game implements GameInterface {
 		else {
 			if (this.getCurrentPlayer().getClass() != PlayerMouse.class) {
 				this.getCurrentPlayer().updateBoard(this.board.copy());
-				Vector2 move = this.getCurrentPlayer().play();
-				this.makeMove(move);
+				this.getCurrentPlayer().play(this);
 			}
 			else {
 				this.raiseEvent(new ActionEvent(this.getCurrentPlayer().getColor(), EVENT_PLAYER_TURN_START, null));
 			}
 		}
 	}
+	
+	@Override
+	public void receiveMove(Vector2 move) {
+		if (!this.isTerminated()) {
+			this.makeMove(move);
+		}
+	}
+	
 
 	public void addListener(ActionListener l) {
 		this.listeners.add(l);

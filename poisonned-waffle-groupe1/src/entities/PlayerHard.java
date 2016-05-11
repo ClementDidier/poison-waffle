@@ -1,8 +1,7 @@
 package entities;
 
 import java.awt.Color;
-
-import utilities.Vector2;
+import interfaces.GameInterface;
 
 public class PlayerHard extends Player {
 
@@ -11,8 +10,7 @@ public class PlayerHard extends Player {
 	}
 
 	@Override
-	public Vector2 play() {
-		return null;
+	public void play(GameInterface g) {
 	}
 
 }

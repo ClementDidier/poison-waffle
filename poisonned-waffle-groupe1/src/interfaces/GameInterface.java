@@ -2,6 +2,8 @@ package interfaces;
 
 import java.awt.event.ActionListener;
 
+import utilities.Vector2;
+
 public interface GameInterface {
 	public boolean isTerminated();
 	
@@ -28,4 +30,6 @@ public interface GameInterface {
 	public void addListener(ActionListener l);
 
 	public void removeListener(ActionListener l);
+
+	void receiveMove(Vector2 move);
 }

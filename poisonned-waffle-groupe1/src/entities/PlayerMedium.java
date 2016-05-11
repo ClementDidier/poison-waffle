@@ -2,20 +2,16 @@ package entities;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Random;
 import utilities.Vector2;
 
-public class PlayerMedium extends Player {
-
-	private Random rand;
+public class PlayerMedium extends PlayerIA {
 
 	public PlayerMedium(String name, Color color) {
 		super(name, color);
-		this.rand = new Random();
 	}
 
 	@Override
-	public Vector2 play() {
+	protected Vector2 decideMove() {
 		Vector2 chosenMove = null;
 		ArrayList<Vector2> validMoves = this.board.getValidMoves();
 		boolean needChoice = !validMoves.contains(new Vector2(1, 1));
@@ -32,7 +28,7 @@ public class PlayerMedium extends Player {
 				boolean ligneEtendue = validMoves.contains(new Vector2(2, 0));
 				boolean colonneEtendue = validMoves.contains(new Vector2(0, 2));
 				if (ligneEtendue == true && colonneEtendue == true) {
-					if(rand.nextBoolean())
+					if (this.rand.nextBoolean())
 						chosenMove = new Vector2(2, 0);
 					else
 						chosenMove = new Vector2(0, 2);
@@ -44,7 +40,7 @@ public class PlayerMedium extends Player {
 					chosenMove = new Vector2(0, 2);
 				}
 				else {
-					if(rand.nextBoolean())
+					if (this.rand.nextBoolean())
 						chosenMove = new Vector2(1, 0);
 					else
 						chosenMove = new Vector2(0, 1);
@@ -54,8 +50,7 @@ public class PlayerMedium extends Player {
 		else {
 			chosenMove = validMoves.get(this.rand.nextInt(validMoves.size()));
 		}
-		System.out.println("IA en " + chosenMove);
-
+		
 		return chosenMove;
 	}
 }

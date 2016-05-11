@@ -1,11 +1,10 @@
 package interfaces;
 
 import java.awt.Color;
-
-import utilities.Vector2;
+import interfaces.GameInterface;
 
 public interface PlayerInterface {
-	public Vector2 play();
+	public void play(GameInterface g);
 
 	public void updateBoard(BoardInterface board);
 
