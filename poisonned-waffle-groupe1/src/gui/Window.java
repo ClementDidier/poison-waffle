@@ -169,7 +169,7 @@ public class Window implements Runnable, ActionListener {
 	}
 	
 	public void askPlayersForNewGame(){
-		DialogNewGame dialogNewGame = new DialogNewGame(this.frame, "Nouvelle Partie", true);
+		DialogNewGame dialogNewGame = new DialogNewGame(this.frame, "Nouvelle Partie", true, this);
 	}
 	
 	public Hashtable<String, Class> getListeTypeJoueur(){
