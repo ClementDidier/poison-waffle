@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -71,16 +72,27 @@ public class Window implements Runnable, ActionListener {
 		JPanel headerPanel = new JPanel();
 		headerPanel.setPreferredSize(new Dimension(600, 110));
 		headerPanel.setBackground(Color.WHITE);
+		headerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		headerPanel.setLayout(new GridLayout(1, 0));
 
 		ImageIcon icon = new ImageIcon("./resources/logo.png");
 		JLabel logo = new JLabel(icon);
 		headerPanel.add(logo);
 
-		this.turnLabel = new JLabel("Nombre de coups: " + game.getTurn());
-		this.currentPlayerLabel = new JLabel("Tour du joueur: " + game.getCurrentPlayer().getName());
-		headerPanel.add(turnLabel);
-		headerPanel.add(currentPlayerLabel);
+		
+		
+		 JPanel headerRightPanel = new JPanel();
+	     headerRightPanel.setBackground(Color.WHITE);
+	     headerRightPanel.setLayout(new GridLayout(0, 1));
+	     this.turnLabel = new JLabel("Nombre de coups: " + game.getTurn());
+	     turnLabel.setBorder(BorderFactory.createEmptyBorder(30, 90, 0, 0));
+	     this.currentPlayerLabel = new JLabel("Tour du joueur: " + game.getCurrentPlayer().getName());
+	     currentPlayerLabel.setBorder(BorderFactory.createEmptyBorder(0, 88, 30, 0));
+	     headerRightPanel.add(turnLabel, BorderLayout.CENTER); 
+	     headerRightPanel.add(currentPlayerLabel, BorderLayout.CENTER); 
+	        
+	     headerPanel.add(headerRightPanel); 
+	
 
 		// la gaufre
 		this.gameGraphics = new GraphicsPanel(this.game);
@@ -88,20 +100,15 @@ public class Window implements Runnable, ActionListener {
 		frame.getContentPane().add(headerPanel, BorderLayout.PAGE_START);
 		frame.getContentPane().add(this.gameGraphics, BorderLayout.CENTER);
 
-		/*
-		 * // Ajout des elements au panel principal puis affichage contentPanel.add(headerPanel,
-		 * BorderLayout.NORTH); contentPanel.add(gameGraphics, BorderLayout.CENTER);
-		 * 
-		 * frame.setContentPane(contentPanel);
-		 */
+		
 	}
 
 	@Override
 	public void run() {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setSize(605, 608);
+		this.frame.setSize(605, 568);
 		this.frame.setVisible(true);
-		//this.frame.setResizable(false);
+		this.frame.setResizable(false);
 
 		this.game.addListener(this);
 		this.game.doTurn();
